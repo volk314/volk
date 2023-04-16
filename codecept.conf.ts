@@ -12,6 +12,8 @@ export const config: CodeceptJS.MainConfig = {
   helpers: {
     Playwright: {
       url: 'http://opencart.qatestlab.net',
+      waitForNavigation: 'networkidle',
+      waitForTimeout: 5000,
       show: true,
       browser: 'chromium'
     }
