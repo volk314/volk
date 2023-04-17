@@ -1,6 +1,6 @@
 Feature('Sign up');
 
-Scenario('Sign up',  ({ I }) => {
+Scenario('Sign up',  ({ I, landingPage }) => {
 
     let email = `anastasiia${Math.random()}@mailinator.com`;
     let cellPhone = "+38095641784";
@@ -8,8 +8,8 @@ Scenario('Sign up',  ({ I }) => {
     console.log(email);
 
     I.amOnPage('http://opencart.qatestlab.net');
-    I.click({xpath: '//*[@id="top-links"]/ul/li/span/span'});
-    I.click({xpath: '//*[@id="top-links"]/ul/li/ul/li[1]/a'});
+    landingPage.expandAccountMenu();
+    landingPage.clickRegisterLink();
     I.waitForVisible({xpath: '//*[@id="input-firstname"]'});
     I.fillField({xpath: '//*[@id="input-firstname"]'}, "Anastasiia");
     I.fillField({xpath: '//*[@id="input-lastname"]'}, '6');
@@ -19,4 +19,5 @@ Scenario('Sign up',  ({ I }) => {
     I.fillField({xpath: '//*[@id="input-confirm"]'}, pass);
     I.click({xpath: '//*[@id="content"]/form/div/div/input[1]'});
     I.click({xpath: '//*[@id="content"]/form/div/div/input[2]'});
+    I.see('Your Account Has Been Created!');
 });
