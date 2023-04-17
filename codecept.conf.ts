@@ -23,7 +23,8 @@ export const config: CodeceptJS.MainConfig = {
   },
   include: {
     I: './steps_file',
-    landingPage: "./pages/landing.ts"
+    landingPage: "./pages/landing.ts",
+    loginPage: "./pages/login.ts"
   },
   name: 'volk'
 }
