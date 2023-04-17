@@ -8,8 +8,8 @@ module.exports = {
   cellPhoneField: {xpath: '//*[@id="input-telephone"]'},
   passwordField: {xpath: '//*[@id="input-password"]'},
   confirmPasswordField: {xpath: '//*[@id="input-confirm"]'},
-  acceptTermsCheckbox: {xpath: '//*[@id="content"]/form/div/div/input[1]'},
-  submitButton: {xpath: '//*[@id="content"]/form/div/div/input[2]'},
+  acceptTermsCheckbox: {xpath: '//input[@name="agree"]'},
+  submitButton: {xpath: '//input[@type="submit"]'},
 
   // insert your locators and methods here
   signUp(email: string, cellPhone: string, password: string){

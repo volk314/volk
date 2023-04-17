@@ -2,9 +2,9 @@ var { I } = inject();
 
 module.exports = {
 
-  accountMenuButton: {xpath: '//*[@id="top-links"]/ul/li/span/span'},
-  registerButton: {xpath: '//*[@id="top-links"]/ul/li/ul/li[1]/a'},
-  loginButton: {xpath: '//*[@id="page"]/header/div[1]/div[1]/div/div/div/div/div[2]/div/div[2]/a'},
+  accountMenuButton: {xpath: '//i[@class="material-icons-expand_more"]/preceding-sibling::span'},
+  registerButton: {xpath: '//a[contains(@href, "register")]'},
+  loginButton: {xpath: '//a[contains(@href, "login")]'},
 
   expandAccountMenu(){
     I.click(this.accountMenuButton);
