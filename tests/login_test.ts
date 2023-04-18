@@ -10,8 +10,7 @@ Scenario('Login',  ({ I }) => {
         password: "50p8c0ze"
     } 
 
-    //I.openStore();
-    I.amOnPage('http://opencart.qatestlab.net');
+    I.openStore();
     LandingPage.clickLoginLink();
     LoginPage.login(USER);
     I.see('My Affiliate Account');

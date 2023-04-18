@@ -1,16 +1,19 @@
 import LandingPage from "../pages/landingPage";
 import LoginPage from "../pages/loginPage";
+import ProductPage from "../pages/productPage";
+import CartPage from "../pages/cartPage";
+import CheckoutPage from "../pages/checkoutPage";
 
 Feature('Purchase');
 
-xScenario('Buy 1 product',  ({ I }) => {
+Scenario('Buy 1 product',  ({ I }) => {
 
     const USER = {
         email: `anastasiia0.2687341244603123@mailinator.com`,
         password: "50p8c0ze"
     } 
 
-    I.amOnPage('http://opencart.qatestlab.net');
+    I.openStore();
     LandingPage.clickLoginLink();
     LoginPage.login(USER);
     I.see('My Affiliate Account');

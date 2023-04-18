@@ -10,7 +10,7 @@ Scenario('Sign up',  ({ I }) => {
     let pass = "50p8c0ze"
     console.log(email);
 
-    I.amOnPage('http://opencart.qatestlab.net');
+    I.openStore();
     LandingPage.expandAccountMenu();
     LandingPage.clickRegisterLink();
     RegisterPage.signUp(email, cellPhone, pass);
