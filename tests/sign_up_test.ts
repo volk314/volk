@@ -1,8 +1,9 @@
 import LandingPage from "../pages/landingPage";
+import RegisterPage from "../pages/registerPage";
 
 Feature('Sign up');
 
-Scenario('Sign up',  ({ I, registerPage }) => {
+Scenario('Sign up',  ({ I }) => {
 
     let email = `anastasiia${Math.random()}@mailinator.com`;
     let cellPhone = "+38095641784";
@@ -12,6 +13,6 @@ Scenario('Sign up',  ({ I, registerPage }) => {
     I.amOnPage('http://opencart.qatestlab.net');
     LandingPage.expandAccountMenu();
     LandingPage.clickRegisterLink();
-    registerPage.signUp(email, cellPhone, pass);
+    RegisterPage.signUp(email, cellPhone, pass);
     I.see('Your Account Has Been Created!');
 });

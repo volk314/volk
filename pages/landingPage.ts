@@ -6,15 +6,15 @@ class LandingPage {
     registerButton = {xpath: '//a[contains(@href, "register")]'};
     loginButton = {xpath: '//a[contains(@href, "login")]'};
 
-    public expandAccountMenu(){
+    expandAccountMenu(){
         I.click(this.accountMenuButton);
     }
     
-    public clickRegisterLink(){
+    clickRegisterLink(){
         I.click(this.registerButton);
     }
     
-    public clickLoginLink() {
+    clickLoginLink() {
         I.click(this.loginButton);
     };
 }
