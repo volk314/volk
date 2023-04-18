@@ -1,6 +1,6 @@
 const { I } = inject();
 
-export class LandingPage {
+class LandingPage {
     
     accountMenuButton = {xpath: '//i[@class="material-icons-expand_more"]/preceding-sibling::span'};
     registerButton = {xpath: '//a[contains(@href, "register")]'};
@@ -18,3 +18,5 @@ export class LandingPage {
         I.click(this.loginButton);
     };
 }
+
+export = new LandingPage();

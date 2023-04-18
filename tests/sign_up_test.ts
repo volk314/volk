@@ -1,4 +1,4 @@
-import { LandingPage } from "../pages/landingPage";
+import LandingPage from "../pages/landingPage";
 
 Feature('Sign up');
 
@@ -10,9 +10,8 @@ Scenario('Sign up',  ({ I, registerPage }) => {
     console.log(email);
 
     I.amOnPage('http://opencart.qatestlab.net');
-    const landingPage = new LandingPage();
-    landingPage.expandAccountMenu();
-    landingPage.clickRegisterLink();
+    LandingPage.expandAccountMenu();
+    LandingPage.clickRegisterLink();
     registerPage.signUp(email, cellPhone, pass);
     I.see('Your Account Has Been Created!');
 });

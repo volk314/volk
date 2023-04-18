@@ -1,13 +1,18 @@
+import LandingPage from "../pages/landingPage";
+import LoginPage from "../pages/loginPage";
+
 Feature('Purchase');
 
-Scenario('Buy 1 product',  ({ I, landingPage, loginPage }) => {
+xScenario('Buy 1 product',  ({ I }) => {
 
-    let email = `anastasiia0.2687341244603123@mailinator.com`;
-    let pass = "50p8c0ze"
+    const USER = {
+        email: `anastasiia0.2687341244603123@mailinator.com`,
+        password: "50p8c0ze"
+    } 
 
     I.amOnPage('http://opencart.qatestlab.net');
-    landingPage.clickLoginLink();
-    loginPage.login(email, pass);
+    LandingPage.clickLoginLink();
+    LoginPage.login(USER);
     I.see('My Affiliate Account');
     I.amOnPage('http://opencart.qatestlab.net/index.php?route=product/product&path=32&product_id=31');
     

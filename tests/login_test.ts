@@ -1,8 +1,9 @@
-import { LandingPage } from "../pages/landingPage";
+import LandingPage from "../pages/landingPage";
+import LoginPage from "../pages/loginPage";
 
 Feature('Login');
 
-Scenario('Login',  ({ I, loginPage }) => {
+Scenario('Login',  ({ I }) => {
 
     const USER = {
         email: `anastasiia0.2687341244603123@mailinator.com`,
@@ -11,8 +12,7 @@ Scenario('Login',  ({ I, loginPage }) => {
 
     //I.openStore();
     I.amOnPage('http://opencart.qatestlab.net');
-    const landingPage = new LandingPage();
-    landingPage.clickLoginLink();
-    loginPage.login(USER);
+    LandingPage.clickLoginLink();
+    LoginPage.login(USER);
     I.see('My Affiliate Account');
 });
