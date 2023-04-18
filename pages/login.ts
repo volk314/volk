@@ -6,10 +6,10 @@ module.exports = {
   passwordField: {xpath: '//*[@id="input-password"]'},
   submitButton: {xpath: '//input[@type="submit"]'},
 
-  login(email: string, password: string) {
+  login(USER) {
     I.see('Returning Customer');
-    I.fillField(this.emailField, email);
-    I.fillField(this.passwordField, password);
+    I.fillField(this.emailField, USER.email);
+    I.fillField(this.passwordField, USER.password);
     I.click(this.submitButton);
   }
 

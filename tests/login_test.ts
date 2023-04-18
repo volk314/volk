@@ -1,12 +1,18 @@
+import { LandingPage } from "../pages/landingPage";
+
 Feature('Login');
 
-Scenario('Login',  ({ I, landingPage, loginPage }) => {
+Scenario('Login',  ({ I, loginPage }) => {
 
-    let email = `anastasiia0.2687341244603123@mailinator.com`;
-    let pass = "50p8c0ze"
+    const USER = {
+        email: `anastasiia0.2687341244603123@mailinator.com`,
+        password: "50p8c0ze"
+    } 
 
+    //I.openStore();
     I.amOnPage('http://opencart.qatestlab.net');
+    const landingPage = new LandingPage();
     landingPage.clickLoginLink();
-    loginPage.login(email, pass);
+    loginPage.login(USER);
     I.see('My Affiliate Account');
 });
