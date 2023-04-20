@@ -3,12 +3,13 @@ import LoginPage from "../pages/loginPage";
 import ProductPage from "../pages/productPage";
 import CartPage from "../pages/cartPage";
 import CheckoutPage from "../pages/checkoutPage";
+import { User } from "../helpers/interfaces";
 
 Feature('Purchase');
 
 Scenario('Buy 1 product with no options',  ({ I }) => {
 
-    const USER = {
+    const USER: User = {
         email: `anastasiia0.2687341244603123@mailinator.com`,
         password: "50p8c0ze"
     } 
