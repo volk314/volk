@@ -8,25 +8,12 @@ import Products = require("../testdata/products");
 
 Feature('Purchase');
 
-const smallPetCarrier: ProductData = {
-    id: "49", 
-    color: "Green",
-    size: "Medium"
-}
-const clippers: ProductData = {
-    id: "74", 
-    color: "Black",
-    size: undefined
-}
-const dryCatFood: ProductData = {
-    id: "73", 
-    color: undefined,
-    size: undefined
-}
-const petCarrier = "http://opencart.qatestlab.net/index.php?route=product/product&product_id=43";
-const petRug = "http://opencart.qatestlab.net/index.php?route=product/product&product_id=45";
-const autoFeeder = "http://opencart.qatestlab.net/index.php?route=product/product&product_id=47";
-const hammock = "http://opencart.qatestlab.net/index.php?route=product/product&product_id=60";
+const smallPetCarrier: ProductData = { id: "49", color: "Green", size: "Medium" };
+const clippers: ProductData = { id: "74", color: "Black", size: undefined };
+const dryCatFood: ProductData = { id: "73", color: undefined, size: undefined };
+const petCarrier : ProductData = { id: "43", color: "Brown", size: undefined };
+const autoFeeder : ProductData = { id: "47", color: "White", size: undefined };
+const hammock: ProductData = { id: "60", color: undefined, size: undefined };
 
 const USER: User = {
     email: `anastasiia0.2687341244603123@mailinator.com`,
@@ -39,7 +26,7 @@ Scenario('Buy 1 product without options',  async ({ I }) => {
     LandingPage.clickLoginLink();
     LoginPage.login(USER);
     I.see('My Affiliate Account');
-    //await CartPage.clearCart();
+    await CartPage.clearCart();
     I.amOnPage(Products.getProductUrl(dryCatFood));
     I.see('Product Code');
     await ProductPage.selectOption(dryCatFood);
@@ -57,7 +44,7 @@ Scenario('Buy 1 product with color option',  async ({ I }) => {
     LandingPage.clickLoginLink();
     LoginPage.login(USER);
     I.see('My Affiliate Account');
-    //await CartPage.clearCart();
+    await CartPage.clearCart();
     I.amOnPage(Products.getProductUrl(clippers));
     I.see('Product Code');
     await ProductPage.selectOption(clippers);
@@ -75,7 +62,7 @@ Scenario('Buy 1 product with two options',  async ({ I }) => {
     LandingPage.clickLoginLink();
     LoginPage.login(USER);
     I.see('My Affiliate Account');
-    //await CartPage.clearCart();
+    await CartPage.clearCart();
     I.amOnPage(Products.getProductUrl(smallPetCarrier));
     I.see('Product Code');
     await ProductPage.selectOption(smallPetCarrier);
