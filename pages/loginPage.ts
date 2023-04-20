@@ -10,6 +10,7 @@ class LoginPage {
         I.see('Returning Customer');
         I.fillField(this.emailField, USER.email);
         I.fillField(this.passwordField, USER.password);
+        I.seeNumberOfElements(this.submitButton, 1);
         I.click(this.submitButton);
     }
 }
