@@ -7,17 +7,17 @@ class CheckoutPage {
     confirmOrderButton = {xpath: "//input[@value='Confirm Order']"};
     agreeCheckbox = {xpath: "//input[@type = 'checkbox']"};
 
-    placeOrder(){
-        I.seeNumberOfElements(this.continueButton, 1);
+    async placeOrder(){
+        await I.seeNumberOfElements(this.continueButton, 1);
         I.click(this.continueButton);
-        I.seeNumberOfElements(this.continueButton, 2);
+        await I.seeNumberOfElements(this.continueButton, 2);
         I.click(this.continueButton);
-        I.seeNumberOfElements(this.continueButton, 3);
+        await I.seeNumberOfElements(this.continueButton, 3);
         I.click(this.continueButton);
-        I.seeNumberOfElements(this.continueButton, 4);
+        await I.seeNumberOfElements(this.continueButton, 4);
         I.click(this.agreeCheckbox);
         I.click(this.continueButton);
-        I.seeNumberOfElements(this.confirmOrderButton, 1);
+        await I.seeNumberOfElements(this.confirmOrderButton, 1);
         I.click(this.confirmOrderButton);
     }
 

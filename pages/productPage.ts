@@ -1,15 +1,24 @@
+import { ProductData } from "../helpers/interfaces";
+
 const { I } = inject();
 
 class ProductPage {
 
-    addToCartButton = {xpath: '//button[contains(@id, "cart")]'};
+    addToCartButton = {xpath: '//button[contains(@id, "button-cart")]'};
     cartPreviewButton = {xpath: '//div[@id = "cart"]'};
     cartButton = {xpath: '//li/div/a[contains(@href, "checkout/cart") ]'};
 
-    selectOption(dropdown: string, option: string){
-        I.seeNumberOfElements(this.getDropdownLocator(dropdown), 1);
-        I.click(this.getDropdownLocator(dropdown));
-        I.click(this.getOptionLocator(option));
+    async selectOption(product: ProductData){
+        if (product.color) {
+            await I.seeNumberOfElements(this.getDropdownLocator("Color"), 1);
+            I.click(this.getDropdownLocator("Color"));
+            I.click(this.getOptionLocator(product.color));
+        }
+        if (product.size) {
+            await I.seeNumberOfElements(this.getDropdownLocator("Size"), 1);
+            I.click(this.getDropdownLocator("Size"));
+            I.click(this.getOptionLocator(product.size));
+        }
     }
 
     addToCart(){
