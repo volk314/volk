@@ -7,7 +7,7 @@ class ProductPage {
     cartPreviewButton = {xpath: '//div[@id = "cart"]'};
     cartButton = {xpath: '//li/div/a[contains(@href, "checkout/cart") ]'};
 
-    async selectOption(color: any, size: any){
+    async selectOption(color: string | null, size: string | null){
         if (color) {
             await I.seeNumberOfElements(this.getDropdownLocator("Color"), 1);
             I.click(this.getDropdownLocator("Color"));

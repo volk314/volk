@@ -1,3 +1,5 @@
+import { User } from "../helpers/interfaces";
+
 const { I } = inject();
 
 class LoginPage {
@@ -6,7 +8,7 @@ class LoginPage {
     passwordField = {xpath: '//*[@id="input-password"]'};
     submitButton = {xpath: '//input[@type="submit"]'};
 
-    login(USER: any) {
+    login(USER: User) {
         I.see('Returning Customer');
         I.fillField(this.emailField, USER.email);
         I.fillField(this.passwordField, USER.password);

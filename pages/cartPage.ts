@@ -8,7 +8,7 @@ class CartPage {
     deleteButton = {xpath: '//button[@data-original-title="Remove"]'};
 
     async proceedToCheckout(){
-        await I.seeNumberOfElements(this.checkoutButton, 1);
+        I.seeNumberOfElements(this.checkoutButton, 1);
         I.click(this.checkoutButton);
         I.see("Checkout");
     }
@@ -17,7 +17,7 @@ class CartPage {
         I.click(productPage.cartPreviewButton);
         if (await I.grabNumberOfVisibleElements(productPage.cartButton)){
             I.click(productPage.cartButton);
-            while(await I.grabNumberOfVisibleElements(this.deleteButton)>0){
+            while(await I.seeElement(this.deleteButton)){
                 I.click(this.deleteButton);
             }
         } else {
