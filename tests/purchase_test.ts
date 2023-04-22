@@ -4,18 +4,17 @@ import ProductPage from "../pages/productPage";
 import CartPage from "../pages/cartPage";
 import CheckoutPage from "../pages/checkoutPage";
 import { User } from "../helpers/interfaces";
-import Products from "../helpers/products";
 
 Feature('Purchase');
 
-let products = new DataTable(['id', 'color', 'size']);
-//products.add(['49', 'Green', 'Medium']);
-//products.add(['74', 'Black', null]); checkout failure?
-products.add(['73', null, null]);
-//products.add(['48', 'Green', 'Large']);
-//products.add(['43', 'Brown', null]); options are absent
-//products.add(['47', 'White', null]); checkout failure?
-//products.add(['60', null, null]); checkout failure?
+let products = new DataTable(['url', 'color', 'size']);
+//products.add(['/index.php?route=product/product&product_id=49', 'Green', 'Medium']);
+//products.add(['/index.php?route=product/product&product_id=74', 'Black', null]); checkout failure?
+products.add(['/index.php?route=product/product&product_id=73', null, null]);
+//products.add(['/index.php?route=product/product&product_id=48', 'Green', 'Large']);
+//products.add(['/index.php?route=product/product&product_id=43', 'Brown', null]); options are absent
+//products.add(['/index.php?route=product/product&product_id=47', 'White', null]); checkout failure?
+//products.add(['/index.php?route=product/product&product_id=60', null, null]); checkout failure?
 
 const USER: User = {
     email: `anastasiia0.2687341244603123@mailinator.com`,
@@ -23,12 +22,10 @@ const USER: User = {
 };
 
 Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
-    I.openStore();
-    LandingPage.clickLoginLink();
     LoginPage.login(USER);
     I.see('My Affiliate Account');
     await CartPage.clearCart();
-    I.amOnPage(Products.getProductUrl(current.id));
+    I.amOnPage(current.url);
     I.see('Product Code');
     await ProductPage.selectOption(current.color, current.size);
     ProductPage.addToCart();

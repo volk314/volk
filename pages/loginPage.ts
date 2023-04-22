@@ -1,4 +1,5 @@
 import { User } from "../helpers/interfaces";
+import LandingPage from "../pages/landingPage";
 
 const { I } = inject();
 
@@ -9,6 +10,8 @@ class LoginPage {
     submitButton = {xpath: '//input[@type="submit"]'};
 
     login(USER: User) {
+        I.openStore();
+        LandingPage.clickLoginLink();
         I.see('Returning Customer');
         I.fillField(this.emailField, USER.email);
         I.fillField(this.passwordField, USER.password);

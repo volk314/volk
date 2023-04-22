@@ -22,7 +22,6 @@ class ProductPage {
 
     addToCart(){
         I.click(this.addToCartButton);
-        I.wait(1);
         I.see('Success');
     }
 

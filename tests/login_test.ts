@@ -1,5 +1,4 @@
 import { User } from "../helpers/interfaces";
-import LandingPage from "../pages/landingPage";
 import LoginPage from "../pages/loginPage";
 
 Feature('Login');
@@ -11,8 +10,6 @@ Scenario('Login',  ({ I }) => {
         password: "50p8c0ze"
     };
 
-    I.openStore();
-    LandingPage.clickLoginLink();
     LoginPage.login(USER);
     I.see('My Affiliate Account');
 });

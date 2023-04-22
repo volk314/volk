@@ -20,8 +20,6 @@ class CartPage {
             while(await I.seeElement(this.deleteButton)){
                 I.click(this.deleteButton);
             }
-        } else {
-            I.click(productPage.cartPreviewButton);
         }
     }
 
