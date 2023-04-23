@@ -6,6 +6,7 @@ class ProductPage {
     addToCartButton = {xpath: '//button[contains(@id, "button-cart")]'};
     cartPreviewButton = {xpath: '//div[@id = "cart"]'};
     cartButton = {xpath: '//li/div/a[contains(@href, "checkout/cart") ]'};
+    priceLabel = {xpath: '//div[@class = "price"]/span'};
 
     async selectOption(color: string | null, size: string | null){
         if (color) {

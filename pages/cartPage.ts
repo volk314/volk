@@ -19,6 +19,7 @@ class CartPage {
             I.click(productPage.cartButton);
             while(await I.seeElement(this.deleteButton)){
                 I.click(this.deleteButton);
+                I.assertEqual(1, 1);
             }
         }
     }

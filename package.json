@@ -19,5 +19,8 @@
         "playwright": "^1.32.2",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.4"
+    },
+    "dependencies": {
+        "codeceptjs-chai": "^2.3.5"
     }
 }
