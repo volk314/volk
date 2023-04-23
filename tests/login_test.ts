@@ -1,5 +1,5 @@
 import User from "../helpers/interfaces";
-import LoginPage from "../pages/loginPage";
+import LoginPage = require("../pages/loginPage");
 
 Feature('Login');
 
