@@ -1,9 +1,8 @@
-import LandingPage from "../pages/landingPage";
 import LoginPage from "../pages/loginPage";
 import ProductPage from "../pages/productPage";
 import CartPage from "../pages/cartPage";
 import CheckoutPage from "../pages/checkoutPage";
-import { User } from "../helpers/interfaces";
+import User from "../helpers/interfaces";
 
 Feature('Purchase');
 
@@ -21,10 +20,13 @@ const USER: User = {
     password: "50p8c0ze"
 };
 
-Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
+Before(async ({ I }) => { // or Background
     LoginPage.login(USER);
     I.see('My Affiliate Account');
     await CartPage.clearCart();
+});
+
+Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
     I.amOnPage(current.url);
     I.see('Product Code');
     await ProductPage.selectOption(current.color, current.size);

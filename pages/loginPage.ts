@@ -1,4 +1,4 @@
-import { User } from "../helpers/interfaces";
+import User from "../helpers/interfaces";
 import LandingPage from "../pages/landingPage";
 
 const { I } = inject();

@@ -1,4 +1,4 @@
-import { User } from "../helpers/interfaces";
+import User from "../helpers/interfaces";
 import LoginPage from "../pages/loginPage";
 
 Feature('Login');
