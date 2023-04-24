@@ -8,17 +8,22 @@ class ProductPage {
     cartButton = {xpath: '//li/div/a[contains(@href, "checkout/cart") ]'};
     priceLabel = {xpath: '//div[@class = "price"]/span'};
 
-    async selectOption(color: string | null, size: string | null){
+    async selectOption(color: string | null, size: string | null): Promise <number>{
+        let sizeAddPrice = 0;
+        let colorAddPrice = 0;
         if (color) {
             await I.seeNumberOfElements(this.getDropdownLocator("Color"), 1);
             I.click(this.getDropdownLocator("Color"));
+            colorAddPrice = parseFloat((await I.grabTextFrom(this.getOptionLocator(color))).split('$')[1].split(')')[0]);
             I.click(this.getOptionLocator(color));
         }
         if (size) {
             await I.seeNumberOfElements(this.getDropdownLocator("Size"), 1);
             I.click(this.getDropdownLocator("Size"));
+            sizeAddPrice = parseFloat((await I.grabTextFrom(this.getOptionLocator(size))).split('$')[1].split(')')[0]);
             I.click(this.getOptionLocator(size));
         }
+        return sizeAddPrice + colorAddPrice;
     }
 
     addToCart(){

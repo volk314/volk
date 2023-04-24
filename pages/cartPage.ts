@@ -10,6 +10,7 @@ class CartPage {
     async proceedToCheckout(){
         I.seeNumberOfElements(this.checkoutButton, 1);
         I.click(this.checkoutButton);
+        //pause();
         I.see("Checkout");
     }
 
