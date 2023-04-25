@@ -4,6 +4,7 @@ import CartPage from "../pages/cartPage";
 import CheckoutPage from "../pages/checkoutPage";
 import User, { Product } from "../helpers/interfaces";
 import productPage from "../pages/productPage";
+import cartPage from "../pages/cartPage";
 var assert = require('assert');
 
 const products = readAndParseData();
@@ -28,11 +29,16 @@ Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
     price = price + await ProductPage.selectOption(current.color, current.size);
     ProductPage.addToCart();
     ProductPage.openCart();
-    I.see("My Cart");
-    await CartPage.proceedToCheckout();
-    let checkoutPrice: number = await CheckoutPage.placeOrder();
-    assert.equal(price, checkoutPrice);
-    I.see("Your order has been placed!");
+    await I.see("My Cart");
+    if (await I.grabNumberOfVisibleElements(cartPage.productUnavailableLabel)){
+        console.log("This product is unavailable for purchase, we will clear the cart now.");
+        CartPage.clearCart();
+    } else {
+        await CartPage.proceedToCheckout();
+        let checkoutPrice: number = await CheckoutPage.placeOrder();
+        assert.equal(price, checkoutPrice);
+        I.see("Your order has been placed!");
+    }
 });
 
 function readAndParseData(): CodeceptJS.DataTable {

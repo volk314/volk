@@ -6,6 +6,7 @@ class CartPage {
     
     checkoutButton = {xpath: '//div[@class = "pull-right"]/a[contains(@href, "checkout/checkout")]'};
     deleteButton = {xpath: '//button[@data-original-title="Remove"]'};
+    productUnavailableLabel = {xpath: '//span[@class="text-danger"]'};
 
     async proceedToCheckout(){
         I.seeNumberOfElements(this.checkoutButton, 1);
@@ -17,12 +18,11 @@ class CartPage {
         I.click(productPage.cartPreviewButton);
         if (await I.grabNumberOfVisibleElements(productPage.cartButton)){
             I.click(productPage.cartButton);
-            while(await I.seeElement(this.deleteButton)){
+            while(await I.grabNumberOfVisibleElements(this.deleteButton)){
                 I.click(this.deleteButton);
             }
         }
     }
-
 }
 
 export = new CartPage();
