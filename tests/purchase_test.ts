@@ -44,15 +44,11 @@ Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
 function readAndParseData(): CodeceptJS.DataTable {
     const fs = require('fs');
     const jsonData = fs.readFileSync('testdata/testdata.json', {encoding:'utf8', flag:'r'});
-    console.log(jsonData);
     let data: { products: Record<string, Product> } = JSON.parse(jsonData);
     let products: Product[] = Object.values(data.products); 
-  
     const dataTable = new DataTable(['url', 'color', 'size']);
-  
     products.forEach((product: Product) => {
       dataTable.add([product.url, product.color || '', product.size || '']);
     });
-  
     return dataTable;
   }
