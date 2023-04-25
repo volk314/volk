@@ -31,8 +31,7 @@ Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
     ProductPage.openCart();
     await I.see("My Cart");
     if (await I.grabNumberOfVisibleElements(cartPage.productUnavailableLabel)){
-        console.log("This product is unavailable for purchase, we will clear the cart now.");
-        CartPage.clearCart();
+        console.log("This product is unavailable for purchase.");
     } else {
         await CartPage.proceedToCheckout();
         let checkoutPrice: number = await CheckoutPage.placeOrder();
