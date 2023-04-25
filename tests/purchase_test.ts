@@ -2,27 +2,20 @@ import LoginPage from "../pages/loginPage";
 import ProductPage from "../pages/productPage";
 import CartPage from "../pages/cartPage";
 import CheckoutPage from "../pages/checkoutPage";
-import User from "../helpers/interfaces";
+import User, { Product } from "../helpers/interfaces";
 import productPage from "../pages/productPage";
 var assert = require('assert');
 
-Feature('Purchase');
+const products = readAndParseData();
 
-let products = new DataTable(['url', 'color', 'size']);
-//products.add(['/index.php?route=product/product&product_id=49', 'Green', 'Medium']); //slects different product??
-//products.add(['/index.php?route=product/product&product_id=74', 'Black', null]); //checkout failure?
-////products.add(['/index.php?route=product/product&product_id=73', null, null]);
-products.add(['/index.php?route=product/product&product_id=48', 'Green', 'Large']);
-//products.add(['/index.php?route=product/product&product_id=43', 'Brown', null]); //options are absent
-//products.add(['/index.php?route=product/product&product_id=47', 'White', null]); //checkout failure?
-//products.add(['/index.php?route=product/product&product_id=60', null, null]); //checkout failure?
+Feature('Purchase');
 
 const USER: User = {
     email: `anastasiia0.2687341244603123@mailinator.com`,
     password: "50p8c0ze"
 };
 
-Before(async ({ I }) => { // or Background
+Before(async ({ I }) => {
     LoginPage.login(USER);
     I.see('My Affiliate Account');
     await CartPage.clearCart();
@@ -41,3 +34,19 @@ Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
     assert.equal(price, checkoutPrice);
     I.see("Your order has been placed!");
 });
+
+function readAndParseData(): CodeceptJS.DataTable {
+    const fs = require('fs');
+    const jsonData = fs.readFileSync('testdata/testdata.json', {encoding:'utf8', flag:'r'});
+    console.log(jsonData);
+    let data: { products: Record<string, Product> } = JSON.parse(jsonData);
+    let products: Product[] = Object.values(data.products); 
+  
+    const dataTable = new DataTable(['url', 'color', 'size']);
+  
+    products.forEach((product: Product) => {
+      dataTable.add([product.url, product.color || '', product.size || '']);
+    });
+  
+    return dataTable;
+  }
