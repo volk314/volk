@@ -18,10 +18,8 @@ class CartPage {
         I.click(productPage.cartPreviewButton);
         if (await I.grabNumberOfVisibleElements(productPage.cartButton)){
             I.click(productPage.cartButton);
-            console.log(await I.grabNumberOfVisibleElements(this.deleteButton));
             while(await I.grabNumberOfVisibleElements(this.deleteButton)){
                 I.click(this.deleteButton);
-                console.log(await I.grabNumberOfVisibleElements(this.deleteButton));
             }
         }
     }
