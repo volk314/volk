@@ -1,14 +1,9 @@
 {
    "products":{
-      "product0unevailable":{
-         "url":"/index.php?route=product/product&product_id=31",
-         "color":"Gray",
-         "size":"Small"
-      },
       "product1x":{
          "url":"/index.php?route=product/product&product_id=49",
          "color":"Green",
-         "size":"Medium"
+         "size":"Large"
       },
       "product2":{
          "url":"/index.php?route=product/product&product_id=74",
@@ -30,20 +25,20 @@
          "color":"Green",
          "size":"Large"
       },
-      "product6x":{
-         "url":"/index.php?route=product/product&product_id=43",
-         "color":"Brown",
-         "size":null
-      },
-      "product7":{
+      "product6":{
          "url":"/index.php?route=product/product&product_id=47",
          "color":"White",
          "size":null
       },
-      "product8":{
+      "product7":{
          "url":"/index.php?route=product/product&product_id=60",
          "color":null,
          "size":null
+      },
+      "product0unavailable":{
+         "url":"/index.php?route=product/product&product_id=31",
+         "color":"Gray",
+         "size":"Small"
       }
    }
 }

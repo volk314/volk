@@ -1,3 +1,4 @@
+import helper from "../helpers/helper";
 
 const { I } = inject();
 
@@ -14,13 +15,13 @@ class ProductPage {
         if (color) {
             await I.seeNumberOfElements(this.getDropdownLocator("Color"), 1);
             I.click(this.getDropdownLocator("Color"));
-            colorAddPrice = parseFloat((await I.grabTextFrom(this.getOptionLocator(color))).split('$')[1].split(')')[0]);
+            colorAddPrice = await helper.parseOptionPrice(await I.grabTextFrom(this.getOptionLocator(color)));
             I.click(this.getOptionLocator(color));
         }
         if (size) {
             await I.seeNumberOfElements(this.getDropdownLocator("Size"), 1);
             I.click(this.getDropdownLocator("Size"));
-            sizeAddPrice = parseFloat((await I.grabTextFrom(this.getOptionLocator(size))).split('$')[1].split(')')[0]);
+            sizeAddPrice = await helper.parseOptionPrice(await I.grabTextFrom(this.getOptionLocator(size)));
             I.click(this.getOptionLocator(size));
         }
         return sizeAddPrice + colorAddPrice;

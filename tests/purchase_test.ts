@@ -5,7 +5,8 @@ import CheckoutPage from "../pages/checkoutPage";
 import User, { Product } from "../helpers/interfaces";
 import productPage from "../pages/productPage";
 import cartPage from "../pages/cartPage";
-var assert = require('assert');
+import helper from "../helpers/helper";
+let assert = require('assert');
 
 const products = readAndParseData();
 
@@ -25,7 +26,7 @@ Before(async ({ I }) => {
 Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
     I.amOnPage(current.url);
     I.see('Product Code');
-    let price: number = parseFloat((await I.grabTextFrom(productPage.priceLabel)).split('$')[1]);
+    let price: number = await helper.parsePrice(await I.grabTextFrom(productPage.priceLabel));
     price = price + await ProductPage.selectOption(current.color, current.size);
     ProductPage.addToCart();
     ProductPage.openCart();
@@ -34,7 +35,7 @@ Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
         console.log("This product is unavailable for purchase.");
     } else {
         await CartPage.proceedToCheckout();
-        let checkoutPrice: number = await CheckoutPage.placeOrder();
+        let checkoutPrice: number = await CheckoutPage.placeOrderAndGetFinalPrice();
         assert.equal(price, checkoutPrice);
         I.see("Your order has been placed!");
     }
@@ -50,4 +51,4 @@ function readAndParseData(): CodeceptJS.DataTable {
       dataTable.add([product.url, product.color || '', product.size || '']);
     });
     return dataTable;
-  }
+}
