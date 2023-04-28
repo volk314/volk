@@ -9,7 +9,7 @@ class ProductPage {
     cartButton = {xpath: '//li/div/a[contains(@href, "checkout/cart") ]'};
     priceLabel = {xpath: '//div[@class = "price"]/span'};
 
-    async selectOption(color: string | null, size: string | null): Promise <number>{
+    async selectOptionAndGrabPrice(color: string | null, size: string | null): Promise <number>{
         let sizeAddPrice = 0;
         let colorAddPrice = 0;
         if (color) {

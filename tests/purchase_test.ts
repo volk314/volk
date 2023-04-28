@@ -25,7 +25,7 @@ Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
     I.amOnPage(current.url);
     I.see('Product Code');
     let price: number = await helper.parsePrice(await I.grabTextFrom(productPage.priceLabel));
-    price = price + await productPage.selectOption(current.color, current.size);
+    price = price + await productPage.selectOptionAndGrabPrice(current.color, current.size);
     productPage.addToCart();
     productPage.openCart();
     await I.see("My Cart");
