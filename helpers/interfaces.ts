@@ -3,12 +3,6 @@ export default interface User{
     password: string;
 }
 
-export interface Product2 {
-    url: string;
-    color: string | null;
-    size: string | null;
-}
-
 export interface Product {
     url: string;
     options: {

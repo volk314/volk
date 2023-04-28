@@ -1,6 +1,6 @@
 import loginPage from "../pages/loginPage";
 import checkoutPage from "../pages/checkoutPage";
-import User, { Product, Product2 } from "../helpers/interfaces";
+import User, { Product } from "../helpers/interfaces";
 import productPage from "../pages/productPage";
 import cartPage from "../pages/cartPage";
 import helper from "../helpers/helper";
