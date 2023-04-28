@@ -1,39 +1,50 @@
-import LoginPage from "../pages/loginPage";
-import ProductPage from "../pages/productPage";
-import CartPage from "../pages/cartPage";
-import CheckoutPage from "../pages/checkoutPage";
-import User from "../helpers/interfaces";
+import User, { Product } from "../helpers/interfaces";
+import helper from "../helpers/helper";
+let assert = require('assert');
+
+const products = readAndParseData();
 
 Feature('Purchase');
-
-let products = new DataTable(['url', 'color', 'size']);
-products.add(['/index.php?route=product/product&product_id=49', 'Green', 'Medium']);
-products.add(['/index.php?route=product/product&product_id=74', 'Black', null]); //checkout failure?
-products.add(['/index.php?route=product/product&product_id=73', null, null]);
-products.add(['/index.php?route=product/product&product_id=48', 'Green', 'Large']);
-products.add(['/index.php?route=product/product&product_id=43', 'Brown', null]); //options are absent
-products.add(['/index.php?route=product/product&product_id=47', 'White', null]); //checkout failure?
-products.add(['/index.php?route=product/product&product_id=60', null, null]); //checkout failure?
 
 const USER: User = {
     email: `anastasiia0.2687341244603123@mailinator.com`,
     password: "50p8c0ze"
 };
 
-Before(async ({ I }) => { // or Background
-    LoginPage.login(USER);
+Before(async ({ I, loginPage, cartPage }) => {
+    await loginPage.login(USER);
     I.see('My Affiliate Account');
-    await CartPage.clearCart();
+    await cartPage.clearCart();
 });
 
-Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
+Data(products).Scenario('Buy 1 product',  async ({ I, current, checkoutPage, productPage, cartPage}) => {
     I.amOnPage(current.url);
     I.see('Product Code');
-    await ProductPage.selectOption(current.color, current.size);
-    ProductPage.addToCart();
-    ProductPage.openCart();
-    I.see("My Cart")
-    await CartPage.proceedToCheckout();
-    await CheckoutPage.placeOrder();
-    I.see("Your order has been placed!");
+    let price: number = await helper.parsePrice(await I.grabTextFrom(productPage.priceLabel));
+    price = price + await productPage.selectOptionAndGrabPrice(current.color, current.size);
+    productPage.addToCart();
+    productPage.openCart();
+    await I.see("My Cart");
+    if (await I.grabNumberOfVisibleElements(cartPage.productUnavailableLabel)){
+        console.log("This product is unavailable for purchase.");
+    } else {
+        await cartPage.proceedToCheckout();
+        let checkoutPrice: number = await checkoutPage.placeOrderAndGetFinalPrice();
+        assert.equal(price, checkoutPrice);
+        I.see("Your order has been placed!");
+    }
 });
+  
+  function readAndParseData(): CodeceptJS.DataTable {
+    const fs = require('fs');
+    const jsonData = fs.readFileSync('testdata/testdata.json', { encoding: 'utf8', flag: 'r' });
+    let data: { products: Record<string, Product> } = JSON.parse(jsonData);
+    let products: Product[] = Object.values(data.products);
+    const dataTable = new DataTable(['url', 'color', 'size']);
+    products.forEach((product: Product) => {
+      const options = product.options || {}; // default to empty object if options is null
+      dataTable.add([product.url, options.color || '', options.size || '']);
+    });
+    return dataTable;
+  }
+  

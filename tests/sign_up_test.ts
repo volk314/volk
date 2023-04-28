@@ -1,9 +1,6 @@
-import LandingPage from "../pages/landingPage";
-import RegisterPage from "../pages/registerPage";
-
 Feature('Sign up');
 
-Scenario('Sign up',  ({ I }) => {
+Scenario('Sign up',  ({ I, landingPage, registerPage }) => {
 
     let email = `anastasiia${Math.random()}@mailinator.com`;
     let cellPhone = "+38095641784";
@@ -11,8 +8,8 @@ Scenario('Sign up',  ({ I }) => {
     console.log(email);
 
     I.openStore();
-    LandingPage.expandAccountMenu();
-    LandingPage.clickRegisterLink();
-    RegisterPage.signUp(email, cellPhone, pass);
+    landingPage.expandAccountMenu();
+    landingPage.clickRegisterLink();
+    registerPage.signUp(email, cellPhone, pass);
     I.see('Your Account Has Been Created!');
 });
