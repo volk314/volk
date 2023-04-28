@@ -1,9 +1,6 @@
-import landingPage from "../pages/landingPage";
-import registerPage from "../pages/registerPage";
-
 Feature('Sign up');
 
-Scenario('Sign up',  ({ I }) => {
+Scenario('Sign up',  ({ I, landingPage, registerPage }) => {
 
     let email = `anastasiia${Math.random()}@mailinator.com`;
     let cellPhone = "+38095641784";

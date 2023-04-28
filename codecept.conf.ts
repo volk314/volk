@@ -22,7 +22,13 @@ export const config: CodeceptJS.MainConfig = {
     }
   },
   include: {
-    I: './steps_file'
+    I: './steps_file',
+    cartPage: "./pages/cartPage.ts",
+    checkoutPage: "./pages/checkoutPage.ts",
+    landingPage: "./pages/landingPage.ts",
+    loginPage: "./pages/loginPage.ts",
+    productPage: "./pages/productPage.ts",
+    registerPage: "./pages/registerPage.ts"
   },
   name: 'volk'
 }

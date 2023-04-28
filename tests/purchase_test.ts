@@ -1,8 +1,4 @@
-import loginPage from "../pages/loginPage";
-import checkoutPage from "../pages/checkoutPage";
 import User, { Product } from "../helpers/interfaces";
-import productPage from "../pages/productPage";
-import cartPage from "../pages/cartPage";
 import helper from "../helpers/helper";
 let assert = require('assert');
 
@@ -15,13 +11,13 @@ const USER: User = {
     password: "50p8c0ze"
 };
 
-Before(async ({ I }) => {
+Before(async ({ I, loginPage, cartPage }) => {
     await loginPage.login(USER);
     I.see('My Affiliate Account');
     await cartPage.clearCart();
 });
 
-Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
+Data(products).Scenario('Buy 1 product',  async ({ I, current, checkoutPage, productPage, cartPage}) => {
     I.amOnPage(current.url);
     I.see('Product Code');
     let price: number = await helper.parsePrice(await I.grabTextFrom(productPage.priceLabel));
