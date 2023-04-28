@@ -1,7 +1,5 @@
-import LoginPage from "../pages/loginPage";
-import ProductPage from "../pages/productPage";
-import CartPage from "../pages/cartPage";
-import CheckoutPage from "../pages/checkoutPage";
+import loginPage from "../pages/loginPage";
+import checkoutPage from "../pages/checkoutPage";
 import User, { Product } from "../helpers/interfaces";
 import productPage from "../pages/productPage";
 import cartPage from "../pages/cartPage";
@@ -18,24 +16,24 @@ const USER: User = {
 };
 
 Before(async ({ I }) => {
-    await LoginPage.login(USER);
+    await loginPage.login(USER);
     I.see('My Affiliate Account');
-    await CartPage.clearCart();
+    await cartPage.clearCart();
 });
 
 Data(products).Scenario('Buy 1 product',  async ({ I, current }) => {
     I.amOnPage(current.url);
     I.see('Product Code');
     let price: number = await helper.parsePrice(await I.grabTextFrom(productPage.priceLabel));
-    price = price + await ProductPage.selectOption(current.color, current.size);
-    ProductPage.addToCart();
-    ProductPage.openCart();
+    price = price + await productPage.selectOption(current.color, current.size);
+    productPage.addToCart();
+    productPage.openCart();
     await I.see("My Cart");
     if (await I.grabNumberOfVisibleElements(cartPage.productUnavailableLabel)){
         console.log("This product is unavailable for purchase.");
     } else {
-        await CartPage.proceedToCheckout();
-        let checkoutPrice: number = await CheckoutPage.placeOrderAndGetFinalPrice();
+        await cartPage.proceedToCheckout();
+        let checkoutPrice: number = await checkoutPage.placeOrderAndGetFinalPrice();
         assert.equal(price, checkoutPrice);
         I.see("Your order has been placed!");
     }

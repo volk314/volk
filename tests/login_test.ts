@@ -1,5 +1,5 @@
 import User from "../helpers/interfaces";
-import LoginPage from"../pages/loginPage";
+import loginPage from "../pages/loginPage";
 
 Feature('Login');
 
@@ -10,6 +10,6 @@ Scenario('Login',  async ({ I }) => {
         password: "50p8c0ze"
     };
 
-    await LoginPage.login(USER);
+    await loginPage.login(USER);
     I.see('My Affiliate Account');
 });

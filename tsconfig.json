@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "strictNullChecks": false,
-    "types": ["codeceptjs", "node", "@codeceptjs/factory"],
+    "types": ["codeceptjs", "node"],
     "declaration": true,
     "skipLibCheck": true
   },

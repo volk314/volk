@@ -1,5 +1,5 @@
-import LandingPage from "../pages/landingPage";
-import RegisterPage from "../pages/registerPage";
+import landingPage from "../pages/landingPage";
+import registerPage from "../pages/registerPage";
 
 Feature('Sign up');
 
@@ -11,8 +11,8 @@ Scenario('Sign up',  ({ I }) => {
     console.log(email);
 
     I.openStore();
-    LandingPage.expandAccountMenu();
-    LandingPage.clickRegisterLink();
-    RegisterPage.signUp(email, cellPhone, pass);
+    landingPage.expandAccountMenu();
+    landingPage.clickRegisterLink();
+    registerPage.signUp(email, cellPhone, pass);
     I.see('Your Account Has Been Created!');
 });
